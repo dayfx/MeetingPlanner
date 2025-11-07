@@ -28,7 +28,7 @@ public class StageInitializer implements ApplicationListener<StageReadyEvent> {
             Stage stage = event.getStage();
 
             // Minimum application window size
-            stage.setMinWidth(750);
+            stage.setMinWidth(960);
             stage.setMinHeight(650);
 
             URL fxmlUrl = getClass().getResource("/at/fhtw/swen/meetingplanner/HostView.fxml");

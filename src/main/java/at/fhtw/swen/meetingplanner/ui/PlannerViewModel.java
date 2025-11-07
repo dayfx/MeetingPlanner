@@ -1,6 +1,7 @@
 package at.fhtw.swen.meetingplanner.ui;
 
 import at.fhtw.swen.meetingplanner.bl.MeetingService;
+import at.fhtw.swen.meetingplanner.bl.ReportService;
 import at.fhtw.swen.meetingplanner.model.Meeting;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Component;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.io.File;
+
 @Component
 public class PlannerViewModel {
 
@@ -16,6 +19,7 @@ public class PlannerViewModel {
     private final MeetingService meetingService;
     private final MeetingNotesViewModel meetingNotesViewModel;
     private final SearchViewModel searchViewModel;
+    private final ReportService reportService;
 
     private final StringProperty title = new SimpleStringProperty();
     private final StringProperty from = new SimpleStringProperty();
@@ -28,10 +32,11 @@ public class PlannerViewModel {
     private final ObservableList<Meeting> meetings = FXCollections.observableArrayList();
 
     @Autowired
-    public PlannerViewModel(MeetingService meetingService, MeetingNotesViewModel meetingNotesViewModel, SearchViewModel searchViewModel) {
+    public PlannerViewModel(MeetingService meetingService, MeetingNotesViewModel meetingNotesViewModel, SearchViewModel searchViewModel, ReportService reportService) {
         this.meetingService = meetingService;
         this.meetingNotesViewModel = meetingNotesViewModel;
         this.searchViewModel = searchViewModel;
+        this.reportService = reportService;
     }
 
     public ObservableList<Meeting> getMeetings() {
@@ -92,6 +97,20 @@ public class PlannerViewModel {
             // remove from current saved list even if it's not in DB yet
             meetings.remove(currentlySelectedMeeting);
         }
+    }
+
+    public void generateReport(File file) {
+        if (currentlySelectedMeeting != null && currentlySelectedMeeting.getId() != null) {
+            try {
+                reportService.generateMeetingReport(currentlySelectedMeeting, file);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public Meeting getCurrentlySelectedMeeting() {
+        return currentlySelectedMeeting;
     }
 
     // meeting properties getters

@@ -17,6 +17,7 @@
                      <children>
                         <Button mnemonicParsing="false" onAction="#handleNewMeeting" text="New Meeting" />
                         <Button mnemonicParsing="false" onAction="#handleDeleteMeeting" text="Delete Meeting" />
+                        <Button mnemonicParsing="false" onAction="#handleGenerateReport" text="Generate Report" />
                      </children>
                      <padding>
                         <Insets left="10.0" top="130.0" />
