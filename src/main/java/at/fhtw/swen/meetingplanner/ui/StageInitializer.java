@@ -34,7 +34,7 @@ public class StageInitializer implements ApplicationListener<StageReadyEvent> {
             Parent root = fxmlLoader.load();
 
             stage.setTitle("Meeting Planner");
-            stage.setScene(new Scene(root, 1000, 700));
+            stage.setScene(new Scene(root, 900, 600));
             stage.show();
         } catch (IOException e) {
             throw new RuntimeException(e);

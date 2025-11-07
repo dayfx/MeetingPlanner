@@ -20,6 +20,8 @@ public class MainViewModel {
     private final StringProperty to = new SimpleStringProperty();
     private final StringProperty agenda = new SimpleStringProperty();
 
+    private Meeting currentlySelectedMeeting;
+
     // formatting Date and Time
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
@@ -41,11 +43,21 @@ public class MainViewModel {
         meetings.addAll(meetingService.getAllMeetings());
     }
 
+    public Meeting prepareNewMeeting() {
+        Meeting newMeeting = new Meeting();
+        newMeeting.setTitle("New Meeting"); // Placeholder title
+
+        // add new meeting to list
+        this.meetings.add(newMeeting);
+
+        return newMeeting;
+    }
+
     public void selectMeeting(Meeting selectedMeeting) {
+        this.currentlySelectedMeeting = selectedMeeting;
+
         if (selectedMeeting != null) {
             title.set(selectedMeeting.getTitle());
-
-            // use Date and Time from formatter
             from.set(selectedMeeting.getFromTime());
             to.set(selectedMeeting.getToTime());
             agenda.set(selectedMeeting.getAgenda());
@@ -55,6 +67,18 @@ public class MainViewModel {
             from.set("");
             to.set("");
             agenda.set("");
+        }
+    }
+
+    public void saveCurrentMeeting() {
+        if (currentlySelectedMeeting != null) {
+            currentlySelectedMeeting.setTitle(title.get());
+            currentlySelectedMeeting.setFromTime(from.get());
+            currentlySelectedMeeting.setToTime(to.get());
+            currentlySelectedMeeting.setAgenda(agenda.get());
+
+            meetingService.saveMeeting(currentlySelectedMeeting);
+            loadMeetings();
         }
     }
 

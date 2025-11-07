@@ -28,6 +28,19 @@ public class HelloController {
     }
 
     @FXML
+    private void handleNewMeeting() {
+        Meeting newMeeting = mainViewModel.prepareNewMeeting();
+        meetingsListView.getSelectionModel().select(newMeeting);
+        // scroll to new Meeting if too far down
+        meetingsListView.scrollTo(newMeeting);
+    }
+
+    @FXML
+    private void handleSaveMeeting() {
+        mainViewModel.saveCurrentMeeting();
+    }
+
+    @FXML
     public void initialize() {
 
         // bind items in ListView to ObservableList in ViewModel.
