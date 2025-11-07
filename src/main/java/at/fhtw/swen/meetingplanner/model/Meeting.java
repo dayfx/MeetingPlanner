@@ -13,8 +13,8 @@ public class Meeting {
     private Long id;
 
     private String title;
-    private LocalDateTime fromTime;
-    private LocalDateTime toTime;
+    private String fromTime;
+    private String toTime;
 
     @Column(columnDefinition = "TEXT")
     private String agenda;
@@ -40,19 +40,19 @@ public class Meeting {
         this.title = title;
     }
 
-    public LocalDateTime getFromTime() {
+    public String getFromTime() {
         return fromTime;
     }
 
-    public void setFromTime(LocalDateTime fromTime) {
+    public void setFromTime(String fromTime) {
         this.fromTime = fromTime;
     }
 
-    public LocalDateTime getToTime() {
+    public String getToTime() {
         return toTime;
     }
 
-    public void setToTime(LocalDateTime toTime) {
+    public void setToTime(String toTime) {
         this.toTime = toTime;
     }
 

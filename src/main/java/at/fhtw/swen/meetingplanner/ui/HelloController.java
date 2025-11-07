@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 
 @Controller
 public class HelloController {
@@ -13,6 +15,12 @@ public class HelloController {
 
     @FXML
     private ListView<Meeting> meetingsListView;
+
+    // meeting properties fxml
+    @FXML private TextField titleField;
+    @FXML private TextField fromField;
+    @FXML private TextField toField;
+    @FXML private TextArea agendaArea;
 
     @Autowired
     public HelloController(MainViewModel mainViewModel) {
@@ -37,6 +45,17 @@ public class HelloController {
                 }
             }
         });
+
+        // listen for selection changes in the ListView
+        meetingsListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            mainViewModel.selectMeeting(newValue);
+        });
+
+        // bidirectional for two-way-binding, so it can be updated by user and viewmodel
+        titleField.textProperty().bindBidirectional(mainViewModel.titleProperty());
+        fromField.textProperty().bindBidirectional(mainViewModel.fromProperty());
+        toField.textProperty().bindBidirectional(mainViewModel.toProperty());
+        agendaArea.textProperty().bindBidirectional(mainViewModel.agendaProperty());
 
         mainViewModel.loadMeetings();
     }

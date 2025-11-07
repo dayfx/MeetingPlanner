@@ -24,8 +24,8 @@ public class DataLoader implements CommandLineRunner {
         if (meetingService.getAllMeetings().isEmpty()) { // runs only if DB empty to fill initially
             Meeting meeting1 = new Meeting();
             meeting1.setTitle("Test Meeting 01");
-            meeting1.setFromTime(LocalDateTime.now().plusDays(1));
-            meeting1.setToTime(LocalDateTime.now().plusDays(1).plusHours(1));
+            meeting1.setFromTime("12:00");
+            meeting1.setToTime("13:00");
             meeting1.setAgenda("1. TestAgenda\n2. Test2\n3. Test3");
             meetingService.saveMeeting(meeting1);
         }
