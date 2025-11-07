@@ -10,10 +10,10 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.net.URL;
 
-@Component // Again, we tell Spring to manage this class.
+@Component
 public class StageInitializer implements ApplicationListener<StageReadyEvent> {
 
-    // This method will be called automatically when the StageReadyEvent is published.
+
     @Override
     public void onApplicationEvent(StageReadyEvent event) {
         try {
@@ -26,7 +26,6 @@ public class StageInitializer implements ApplicationListener<StageReadyEvent> {
             stage.setScene(new Scene(root, 800, 600));
             stage.show();
         } catch (IOException e) {
-            // Proper logging should be added here later.
             throw new RuntimeException(e);
         }
     }
