@@ -1,4 +1,4 @@
-package at.fhtw.swen.meetingplanner.meetingplanner;
+package at.fhtw.swen.meetingplanner.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
