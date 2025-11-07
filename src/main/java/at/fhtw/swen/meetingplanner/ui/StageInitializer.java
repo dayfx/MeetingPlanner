@@ -26,7 +26,12 @@ public class StageInitializer implements ApplicationListener<StageReadyEvent> {
     public void onApplicationEvent(StageReadyEvent event) {
         try {
             Stage stage = event.getStage();
-            URL fxmlUrl = getClass().getResource("/at/fhtw/swen/meetingplanner/hello-view.fxml");
+
+            // Minimum application window size
+            stage.setMinWidth(750);
+            stage.setMinHeight(650);
+
+            URL fxmlUrl = getClass().getResource("/at/fhtw/swen/meetingplanner/HostView.fxml");
             FXMLLoader fxmlLoader = new FXMLLoader(fxmlUrl);
 
             fxmlLoader.setControllerFactory(applicationContext::getBean); // ask Spring for controller
@@ -34,7 +39,7 @@ public class StageInitializer implements ApplicationListener<StageReadyEvent> {
             Parent root = fxmlLoader.load();
 
             stage.setTitle("Meeting Planner");
-            stage.setScene(new Scene(root, 900, 600));
+            stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<SplitPane dividerPositions="0.3" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.fhtw.swen.meetingplanner.ui.PlannerController">
+    <items>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="183.0">
+            <children>
+            <VBox layoutX="-1.0" layoutY="-2.0" prefHeight="398.0" prefWidth="176.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="-2.0">
+               <children>
+                      <ListView fx:id="meetingsListView" prefHeight="273.0" prefWidth="176.0" VBox.vgrow="ALWAYS" />
+                  <HBox prefHeight="74.0" prefWidth="176.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#handleNewMeeting" text="New Meeting" />
+                        <Button mnemonicParsing="false" onAction="#handleDeleteMeeting" text="Delete Meeting" />
+                     </children>
+                     <padding>
+                        <Insets left="10.0" top="130.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
+            </children>
+        </AnchorPane>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="397.0">
+            <children>
+            <VBox prefHeight="398.0" prefWidth="416.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+               <children>
+                      <GridPane hgap="10.0" minHeight="180.0" minWidth="200.0" vgap="10.0">
+                          <columnConstraints>
+                              <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="50.0" />
+                              <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+                          </rowConstraints>
+                          <children>
+                              <Label text="Title" />
+                              <Label text="From" GridPane.rowIndex="1" />
+                              <Label text="To" GridPane.rowIndex="2" />
+                              <Label text="Agenda" GridPane.rowIndex="3" />
+                              <TextField fx:id="titleField" GridPane.columnIndex="1" />
+                              <TextField fx:id="fromField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="toField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextArea fx:id="agendaArea" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                          </children>
+                      </GridPane>
+                   <fx:include fx:id="meetingNotesView" source="MeetingNotesView.fxml" VBox.vgrow="ALWAYS" /> <!-- meeting notes View -->
+                  <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="416.0">
+                     <children>
+                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleSaveMeeting" text="Save Meeting">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <rotationAxis>
+                              <Point3D />
+                           </rotationAxis>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
+            </children>
+        </AnchorPane>
+    </items>
+</SplitPane>

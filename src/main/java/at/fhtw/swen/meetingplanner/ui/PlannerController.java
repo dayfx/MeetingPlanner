@@ -9,9 +9,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
 
 @Controller
-public class HelloController {
+public class PlannerController {
 
-    private final MainViewModel mainViewModel;
+    private final PlannerViewModel mainViewModel;
 
     @FXML
     private ListView<Meeting> meetingsListView;
@@ -23,7 +23,7 @@ public class HelloController {
     @FXML private TextArea agendaArea;
 
     @Autowired
-    public HelloController(MainViewModel mainViewModel) {
+    public PlannerController(PlannerViewModel mainViewModel) {
         this.mainViewModel = mainViewModel;
     }
 
@@ -38,6 +38,11 @@ public class HelloController {
     @FXML
     private void handleSaveMeeting() {
         mainViewModel.saveCurrentMeeting();
+    }
+
+    @FXML
+    private void handleDeleteMeeting() {
+        mainViewModel.deleteCurrentMeeting();
     }
 
     @FXML

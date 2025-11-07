@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import java.time.format.DateTimeFormatter;
 
 @Component
-public class MainViewModel {
+public class PlannerViewModel {
 
     private final MeetingService meetingService;
+    private final MeetingNotesViewModel meetingNotesViewModel;
 
     private final StringProperty title = new SimpleStringProperty();
     private final StringProperty from = new SimpleStringProperty();
@@ -22,15 +22,13 @@ public class MainViewModel {
 
     private Meeting currentlySelectedMeeting;
 
-    // formatting Date and Time
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-
     // observableList with all Meetings for UI
     private final ObservableList<Meeting> meetings = FXCollections.observableArrayList();
 
     @Autowired
-    public MainViewModel(MeetingService meetingService) {
+    public PlannerViewModel(MeetingService meetingService, MeetingNotesViewModel meetingNotesViewModel) {
         this.meetingService = meetingService;
+        this.meetingNotesViewModel = meetingNotesViewModel;
     }
 
     public ObservableList<Meeting> getMeetings() {
@@ -45,7 +43,7 @@ public class MainViewModel {
 
     public Meeting prepareNewMeeting() {
         Meeting newMeeting = new Meeting();
-        newMeeting.setTitle("New Meeting"); // Placeholder title
+        newMeeting.setTitle("New Meeting");
 
         // add new meeting to list
         this.meetings.add(newMeeting);
@@ -55,6 +53,8 @@ public class MainViewModel {
 
     public void selectMeeting(Meeting selectedMeeting) {
         this.currentlySelectedMeeting = selectedMeeting;
+
+        meetingNotesViewModel.displayNotes(selectedMeeting);
 
         if (selectedMeeting != null) {
             title.set(selectedMeeting.getTitle());
@@ -79,6 +79,16 @@ public class MainViewModel {
 
             meetingService.saveMeeting(currentlySelectedMeeting);
             loadMeetings();
+        }
+    }
+
+    public void deleteCurrentMeeting() {
+        if (currentlySelectedMeeting != null && currentlySelectedMeeting.getId() != null) {
+            meetingService.deleteMeeting(currentlySelectedMeeting.getId());
+            loadMeetings();
+        } else if (currentlySelectedMeeting != null) {
+            // remove from current saved list even if it's not in DB yet
+            meetings.remove(currentlySelectedMeeting);
         }
     }
 
