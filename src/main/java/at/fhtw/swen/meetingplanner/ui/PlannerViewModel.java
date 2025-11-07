@@ -12,8 +12,10 @@ import javafx.beans.property.StringProperty;
 @Component
 public class PlannerViewModel {
 
+    // Injections
     private final MeetingService meetingService;
     private final MeetingNotesViewModel meetingNotesViewModel;
+    private final SearchViewModel searchViewModel;
 
     private final StringProperty title = new SimpleStringProperty();
     private final StringProperty from = new SimpleStringProperty();
@@ -26,27 +28,27 @@ public class PlannerViewModel {
     private final ObservableList<Meeting> meetings = FXCollections.observableArrayList();
 
     @Autowired
-    public PlannerViewModel(MeetingService meetingService, MeetingNotesViewModel meetingNotesViewModel) {
+    public PlannerViewModel(MeetingService meetingService, MeetingNotesViewModel meetingNotesViewModel, SearchViewModel searchViewModel) {
         this.meetingService = meetingService;
         this.meetingNotesViewModel = meetingNotesViewModel;
+        this.searchViewModel = searchViewModel;
     }
 
     public ObservableList<Meeting> getMeetings() {
-        return meetings;
+        return searchViewModel.getFilteredMeetings();
     }
 
     // put meetings into list
     public void loadMeetings() {
-        meetings.clear();
-        meetings.addAll(meetingService.getAllMeetings());
+        searchViewModel.setAllMeetings(meetingService.getAllMeetings());
     }
 
     public Meeting prepareNewMeeting() {
         Meeting newMeeting = new Meeting();
-        newMeeting.setTitle("New Meeting");
+        newMeeting.setTitle("(New Meeting)");
 
-        // add new meeting to list
-        this.meetings.add(newMeeting);
+        // add directly to filtered list
+        searchViewModel.getFilteredMeetings().add(newMeeting);
 
         return newMeeting;
     }
