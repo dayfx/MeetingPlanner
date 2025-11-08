@@ -50,7 +50,7 @@ public class PlannerViewModel {
 
     public Meeting prepareNewMeeting() {
         Meeting newMeeting = new Meeting();
-        newMeeting.setTitle("(New Meeting)");
+        newMeeting.setTitle("New Meeting");
 
         // add directly to filtered list
         searchViewModel.getFilteredMeetings().add(newMeeting);
