@@ -10,20 +10,24 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 @Component
 public class SearchViewModel {
 
-    // The master list of all meetings, loaded from the database.
+    private static final Logger log = LogManager.getLogger(SearchViewModel.class);
+
+    // list of all meetings, loaded from the database.
     private final List<Meeting> allMeetings = new ArrayList<>();
 
-    // The filtered list that is actually displayed in the UI.
+    // filtered list that is actually displayed in the UI.
     private final ObservableList<Meeting> filteredMeetings = FXCollections.observableArrayList();
 
     private final StringProperty searchText = new SimpleStringProperty("");
 
     public SearchViewModel() {
-        // Add a listener to the search text.
-        // Whenever the user types, the filter logic will be executed.
+        // whenever user types, filter logic will be executed.
         searchText.addListener((obs, oldText, newText) -> filterMeetings(newText));
     }
 
@@ -46,6 +50,7 @@ public class SearchViewModel {
                         (meeting.getAgenda() != null && meeting.getAgenda().toLowerCase().contains(lowerCaseFilter)) ||
                         meeting.getNotes().stream().anyMatch(note -> note.getText().toLowerCase().contains(lowerCaseFilter)))
                 {
+                    log.debug("Searching for meetings with search term: '{}'", filter);
                     filteredMeetings.add(meeting);
                 }
             }

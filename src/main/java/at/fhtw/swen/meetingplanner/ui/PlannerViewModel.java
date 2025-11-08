@@ -12,8 +12,13 @@ import javafx.beans.property.StringProperty;
 
 import java.io.File;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 @Component
 public class PlannerViewModel {
+
+    private static final Logger log = LogManager.getLogger(PlannerViewModel.class);
 
     // Injections
     private final MeetingService meetingService;
@@ -92,6 +97,7 @@ public class PlannerViewModel {
     public void deleteCurrentMeeting() {
         if (currentlySelectedMeeting != null && currentlySelectedMeeting.getId() != null) {
             meetingService.deleteMeeting(currentlySelectedMeeting.getId());
+            log.info("User deleting meeting: '{}'", currentlySelectedMeeting.getTitle());
             loadMeetings();
         } else if (currentlySelectedMeeting != null) {
             // remove from current saved list even if it's not in DB yet
@@ -102,8 +108,10 @@ public class PlannerViewModel {
     public void generateReport(File file) {
         if (currentlySelectedMeeting != null && currentlySelectedMeeting.getId() != null) {
             try {
+                log.info("Generating report for meeting '{}'.", currentlySelectedMeeting.getTitle());
                 reportService.generateMeetingReport(currentlySelectedMeeting, file);
             } catch (Exception e) {
+                log.error("Couldn't generate report for meeting '{}'.", currentlySelectedMeeting.getTitle());
                 e.printStackTrace();
             }
         }

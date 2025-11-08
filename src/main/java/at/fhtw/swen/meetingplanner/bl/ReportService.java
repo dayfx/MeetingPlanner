@@ -10,10 +10,16 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 @Service
 public class ReportService {
 
+    private static final Logger log = LogManager.getLogger(ReportService.class);
+
     public void generateMeetingReport(Meeting meeting, File file) throws IOException, DocumentException {
+
 
         try (Document document = new Document()) {
             PdfWriter.getInstance(document, new FileOutputStream(file));
@@ -50,7 +56,13 @@ public class ReportService {
                     noteList.add(new ListItem(note.getText(), normalFont));
                 }
                 document.add(noteList);
+
+                log.info("Generated report for meeting: '{}'.", meeting.getTitle());
+
             }
+        } catch (Exception e) {
+            log.error("Failed to generate report for meeting: '{}'.", meeting.getTitle(), e);
+            throw new IOException(e.getMessage());
         }
     }
 }

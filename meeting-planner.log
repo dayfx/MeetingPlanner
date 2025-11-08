@@ -1,0 +1,65 @@
+2025-11-08 01:18:46.622  INFO 33680 --- [JavaFX-Launcher] o.s.b.SpringApplication                  : Starting application using Java 17.0.17 on dayneanPC with PID 33680 (started by danie in C:\MeetingPlanner\MeetingPlanner)
+2025-11-08 01:18:46.624  INFO 33680 --- [JavaFX-Launcher] o.s.b.SpringApplication                  : No active profile set, falling back to 1 default profile: "default"
+2025-11-08 01:18:46.803  INFO 33680 --- [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-11-08 01:18:46.828  INFO 33680 --- [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 21 ms. Found 1 JPA repository interfaces.
+2025-11-08 01:18:46.995  INFO 33680 --- [JavaFX-Launcher] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-08 01:18:47.020  INFO 33680 --- [JavaFX-Launcher] o.h.Version                              : HHH000412: Hibernate ORM core version 5.6.12.Final
+2025-11-08 01:18:47.104  INFO 33680 --- [JavaFX-Launcher] o.h.a.c.Version                          : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2025-11-08 01:18:47.157  INFO 33680 --- [JavaFX-Launcher] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2025-11-08 01:18:47.233  INFO 33680 --- [JavaFX-Launcher] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2025-11-08 01:18:47.242  INFO 33680 --- [JavaFX-Launcher] o.h.d.Dialect                            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2025-11-08 01:18:47.547  INFO 33680 --- [JavaFX-Launcher] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-11-08 01:18:47.550  INFO 33680 --- [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-11-08 01:18:47.712  INFO 33680 --- [JavaFX-Launcher] o.s.b.SpringApplication                  : Started application in 1.29 seconds (JVM running for 1.874)
+2025-11-08 01:18:47.808  WARN 33680 --- [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 17.0.12 by JavaFX runtime of version 17.0.2-ea
+2025-11-08 01:18:56.379  INFO 33680 --- [JavaFX Application Thread] a.f.s.m.b.ReportService                  : Generated report for meeting: 'New Meeting Test'.
+2025-11-08 01:19:17.046  INFO 33680 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-11-08 01:19:17.048  INFO 33680 --- [SpringApplicationShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2025-11-08 01:19:17.050  INFO 33680 --- [SpringApplicationShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2025-11-08 01:46:06.146  INFO 28020 --- [JavaFX-Launcher] o.s.b.SpringApplication                  : Starting application using Java 17.0.17 on dayneanPC with PID 28020 (started by danie in C:\MeetingPlanner\MeetingPlanner)
+2025-11-08 01:46:06.147  INFO 28020 --- [JavaFX-Launcher] o.s.b.SpringApplication                  : No active profile set, falling back to 1 default profile: "default"
+2025-11-08 01:46:06.324  INFO 28020 --- [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-11-08 01:46:06.349  INFO 28020 --- [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 20 ms. Found 1 JPA repository interfaces.
+2025-11-08 01:46:06.507  INFO 28020 --- [JavaFX-Launcher] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-08 01:46:06.530  INFO 28020 --- [JavaFX-Launcher] o.h.Version                              : HHH000412: Hibernate ORM core version 5.6.12.Final
+2025-11-08 01:46:06.609  INFO 28020 --- [JavaFX-Launcher] o.h.a.c.Version                          : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2025-11-08 01:46:06.665  INFO 28020 --- [JavaFX-Launcher] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2025-11-08 01:46:06.737  INFO 28020 --- [JavaFX-Launcher] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2025-11-08 01:46:06.746  INFO 28020 --- [JavaFX-Launcher] o.h.d.Dialect                            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2025-11-08 01:46:07.051  INFO 28020 --- [JavaFX-Launcher] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-11-08 01:46:07.055  INFO 28020 --- [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-11-08 01:46:07.165  INFO 28020 --- [JavaFX-Launcher] a.f.s.m.b.MeetingService                 : MeetingService Database Connection established.
+2025-11-08 01:46:07.215  INFO 28020 --- [JavaFX-Launcher] o.s.b.SpringApplication                  : Started application in 1.258 seconds (JVM running for 1.869)
+2025-11-08 01:46:07.305  WARN 28020 --- [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 17.0.12 by JavaFX runtime of version 17.0.2-ea
+2025-11-08 01:46:07.353  INFO 28020 --- [JavaFX Application Thread] a.f.s.m.b.MeetingService                 : Getting all Meetings
+2025-11-08 01:46:09.591  INFO 28020 --- [JavaFX Application Thread] a.f.s.m.u.MeetingNotesViewModel          : Getting all notes for meeting:'New Meeting Test'
+2025-11-08 01:46:11.747  INFO 28020 --- [JavaFX Application Thread] a.f.s.m.u.MeetingNotesViewModel          : Getting all notes for meeting:'New Meeting'
+2025-11-08 01:46:51.219  WARN 28020 --- [JavaFX Application Thread] a.f.s.m.u.MeetingNotesViewModel          : User wanted to add a note, but no meeting was selected.
+2025-11-08 01:47:42.258  INFO 28020 --- [JavaFX Application Thread] a.f.s.m.b.MeetingService                 : Saving Meeting: 'New Test Meeting 37'
+2025-11-08 01:47:42.280  INFO 28020 --- [JavaFX Application Thread] a.f.s.m.b.MeetingService                 : Getting all Meetings
+2025-11-08 01:47:43.398  INFO 28020 --- [JavaFX Application Thread] a.f.s.m.u.MeetingNotesViewModel          : Getting all notes for meeting:'New Test Meeting 37'
+2025-11-08 01:47:49.939  INFO 28020 --- [JavaFX Application Thread] a.f.s.m.u.PlannerViewModel               : Generating report for meeting 'New Test Meeting 37'.
+2025-11-08 01:47:49.998  INFO 28020 --- [JavaFX Application Thread] a.f.s.m.b.ReportService                  : Generated report for meeting: 'New Test Meeting 37'.
+2025-11-08 01:50:28.351  INFO 28020 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-11-08 01:50:28.352  INFO 28020 --- [SpringApplicationShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2025-11-08 01:50:28.354  INFO 28020 --- [SpringApplicationShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2025-11-08 01:50:52.983  INFO 25940 --- [JavaFX-Launcher] o.s.b.SpringApplication                  : Starting application using Java 17.0.17 on dayneanPC with PID 25940 (started by danie in C:\MeetingPlanner\MeetingPlanner)
+2025-11-08 01:50:52.985  INFO 25940 --- [JavaFX-Launcher] o.s.b.SpringApplication                  : No active profile set, falling back to 1 default profile: "default"
+2025-11-08 01:50:53.171  INFO 25940 --- [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-11-08 01:50:53.193  INFO 25940 --- [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 19 ms. Found 1 JPA repository interfaces.
+2025-11-08 01:50:53.353  INFO 25940 --- [JavaFX-Launcher] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-08 01:50:53.378  INFO 25940 --- [JavaFX-Launcher] o.h.Version                              : HHH000412: Hibernate ORM core version 5.6.12.Final
+2025-11-08 01:50:53.457  INFO 25940 --- [JavaFX-Launcher] o.h.a.c.Version                          : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2025-11-08 01:50:53.510  INFO 25940 --- [JavaFX-Launcher] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2025-11-08 01:50:53.588  INFO 25940 --- [JavaFX-Launcher] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2025-11-08 01:50:53.597  INFO 25940 --- [JavaFX-Launcher] o.h.d.Dialect                            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2025-11-08 01:50:53.907  INFO 25940 --- [JavaFX-Launcher] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-11-08 01:50:53.911  INFO 25940 --- [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-11-08 01:50:54.025  INFO 25940 --- [JavaFX-Launcher] a.f.s.m.b.MeetingService                 : MeetingService Database Connection established.
+2025-11-08 01:50:54.075  INFO 25940 --- [JavaFX-Launcher] o.s.b.SpringApplication                  : Started application in 1.293 seconds (JVM running for 1.911)
+2025-11-08 01:50:54.076  INFO 25940 --- [JavaFX-Launcher] a.f.s.m.HelloApplication                 : Meeting Planner app started.
+2025-11-08 01:50:54.171  WARN 25940 --- [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 17.0.12 by JavaFX runtime of version 17.0.2-ea
+2025-11-08 01:50:54.214  INFO 25940 --- [JavaFX Application Thread] a.f.s.m.b.MeetingService                 : Getting all Meetings
+2025-11-08 01:51:24.674  INFO 25940 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-11-08 01:51:24.675  INFO 25940 --- [SpringApplicationShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2025-11-08 01:51:24.677  INFO 25940 --- [SpringApplicationShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
