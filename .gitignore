@@ -4,7 +4,7 @@ target/
 !**/src/test/**/target/
 
 ### logging file ###
-meeting-planner.log.log
+meeting-planner.log
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
