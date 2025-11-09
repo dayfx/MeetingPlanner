@@ -12,8 +12,13 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.net.URL;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 @Component
 public class StageInitializer implements ApplicationListener<StageReadyEvent> {
+
+    private static final Logger log = LogManager.getLogger(StageInitializer.class);
 
     private final ConfigurableApplicationContext applicationContext;
 
@@ -28,7 +33,7 @@ public class StageInitializer implements ApplicationListener<StageReadyEvent> {
             Stage stage = event.getStage();
 
             // Minimum application window size
-            stage.setMinWidth(750);
+            stage.setMinWidth(960);
             stage.setMinHeight(650);
 
             URL fxmlUrl = getClass().getResource("/at/fhtw/swen/meetingplanner/HostView.fxml");
@@ -42,6 +47,7 @@ public class StageInitializer implements ApplicationListener<StageReadyEvent> {
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
+            log.error("FATAL: Could not load the main FXML file. App can't start.", e);
             throw new RuntimeException(e);
         }
     }

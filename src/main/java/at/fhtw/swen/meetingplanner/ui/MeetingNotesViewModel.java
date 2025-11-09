@@ -8,8 +8,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.springframework.stereotype.Component;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 @Component
 public class MeetingNotesViewModel {
+
+    private static final Logger log = LogManager.getLogger(MeetingNotesViewModel.class);
 
     private Meeting currentMeeting;
     private final ObservableList<MeetingNote> notes = FXCollections.observableArrayList();
@@ -20,6 +25,7 @@ public class MeetingNotesViewModel {
         notes.clear();
         if (meeting != null && meeting.getNotes() != null) {
             notes.addAll(meeting.getNotes());
+            log.info("Getting all notes for meeting:'{}'", currentMeeting.getTitle());
         }
     }
 
@@ -32,6 +38,8 @@ public class MeetingNotesViewModel {
             currentMeeting.getNotes().add(newNote);
             notes.add(newNote);
             newNoteText.set("");
+        } else {
+            log.warn("User wanted to add a note, but no meeting was selected.");
         }
     }
 
@@ -39,6 +47,7 @@ public class MeetingNotesViewModel {
         if (currentMeeting != null && selectedNote != null) {
             currentMeeting.getNotes().remove(selectedNote);
             notes.remove(selectedNote);
+            log.info("User deleted note for meeting: '{}'", currentMeeting.getTitle());
         }
     }
 

@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import java.io.File;
 
 @Controller
 public class PlannerController {
@@ -43,6 +46,31 @@ public class PlannerController {
     @FXML
     private void handleDeleteMeeting() {
         mainViewModel.deleteCurrentMeeting();
+    }
+
+    @FXML
+    private void handleGenerateReport() {
+        Meeting selectedMeeting = mainViewModel.getCurrentlySelectedMeeting();
+
+        if (selectedMeeting == null) {
+            return;
+        }
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save Report");
+
+        // need to replace characters that are invalid in filenames
+        String cleanedTitle = selectedMeeting.getTitle().replaceAll("[^a-zA-Z0-9.-]", "_");
+        fileChooser.setInitialFileName(cleanedTitle + "_Report.pdf");
+
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
+
+        Stage stage = (Stage) meetingsListView.getScene().getWindow();
+        File file = fileChooser.showSaveDialog(stage);
+
+        if (file != null) {
+            mainViewModel.generateReport(file);
+        }
     }
 
     @FXML

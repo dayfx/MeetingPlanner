@@ -1,6 +1,7 @@
 package at.fhtw.swen.meetingplanner.ui;
 
 import at.fhtw.swen.meetingplanner.bl.MeetingService;
+import at.fhtw.swen.meetingplanner.bl.ReportService;
 import at.fhtw.swen.meetingplanner.model.Meeting;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,11 +10,21 @@ import org.springframework.stereotype.Component;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.io.File;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 @Component
 public class PlannerViewModel {
 
+    private static final Logger log = LogManager.getLogger(PlannerViewModel.class);
+
+    // Injections
     private final MeetingService meetingService;
     private final MeetingNotesViewModel meetingNotesViewModel;
+    private final SearchViewModel searchViewModel;
+    private final ReportService reportService;
 
     private final StringProperty title = new SimpleStringProperty();
     private final StringProperty from = new SimpleStringProperty();
@@ -26,27 +37,28 @@ public class PlannerViewModel {
     private final ObservableList<Meeting> meetings = FXCollections.observableArrayList();
 
     @Autowired
-    public PlannerViewModel(MeetingService meetingService, MeetingNotesViewModel meetingNotesViewModel) {
+    public PlannerViewModel(MeetingService meetingService, MeetingNotesViewModel meetingNotesViewModel, SearchViewModel searchViewModel, ReportService reportService) {
         this.meetingService = meetingService;
         this.meetingNotesViewModel = meetingNotesViewModel;
+        this.searchViewModel = searchViewModel;
+        this.reportService = reportService;
     }
 
     public ObservableList<Meeting> getMeetings() {
-        return meetings;
+        return searchViewModel.getFilteredMeetings();
     }
 
     // put meetings into list
     public void loadMeetings() {
-        meetings.clear();
-        meetings.addAll(meetingService.getAllMeetings());
+        searchViewModel.setAllMeetings(meetingService.getAllMeetings());
     }
 
     public Meeting prepareNewMeeting() {
         Meeting newMeeting = new Meeting();
         newMeeting.setTitle("New Meeting");
 
-        // add new meeting to list
-        this.meetings.add(newMeeting);
+        // add directly to filtered list
+        searchViewModel.getFilteredMeetings().add(newMeeting);
 
         return newMeeting;
     }
@@ -85,11 +97,28 @@ public class PlannerViewModel {
     public void deleteCurrentMeeting() {
         if (currentlySelectedMeeting != null && currentlySelectedMeeting.getId() != null) {
             meetingService.deleteMeeting(currentlySelectedMeeting.getId());
+            log.info("User deleting meeting: '{}'", currentlySelectedMeeting.getTitle());
             loadMeetings();
         } else if (currentlySelectedMeeting != null) {
             // remove from current saved list even if it's not in DB yet
             meetings.remove(currentlySelectedMeeting);
         }
+    }
+
+    public void generateReport(File file) {
+        if (currentlySelectedMeeting != null && currentlySelectedMeeting.getId() != null) {
+            try {
+                log.info("Generating report for meeting '{}'.", currentlySelectedMeeting.getTitle());
+                reportService.generateMeetingReport(currentlySelectedMeeting, file);
+            } catch (Exception e) {
+                log.error("Couldn't generate report for meeting '{}'.", currentlySelectedMeeting.getTitle());
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public Meeting getCurrentlySelectedMeeting() {
+        return currentlySelectedMeeting;
     }
 
     // meeting properties getters
