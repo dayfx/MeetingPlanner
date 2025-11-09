@@ -1,12 +1,14 @@
 package at.fhtw.swen.meetingplanner.bl;
 
 import at.fhtw.swen.meetingplanner.dal.MeetingRepository;
+import at.fhtw.swen.meetingplanner.dal.NoteRepository;
 import at.fhtw.swen.meetingplanner.model.Meeting;
 import at.fhtw.swen.meetingplanner.model.MeetingNote;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -24,9 +26,13 @@ class MeetingServiceTest {
     @Autowired
     private MeetingRepository meetingRepository; // inject repository
 
+    @Autowired
+    private NoteRepository noteRepository;
+
     @BeforeEach
     void setUp() {
         meetingRepository.deleteAll();
+        noteRepository.deleteAll();
     }
 
     @Test
@@ -108,6 +114,24 @@ class MeetingServiceTest {
     }
 
     @Test
+    void testSaveMeetingWithNoDetails() {
+
+        Meeting meeting = new Meeting();
+        meeting.setTitle("Meeting with no details");
+
+        meetingService.saveMeeting(meeting);
+
+        List<Meeting> meetings = meetingService.getAllMeetings();
+        assertEquals(1, meetings.size());
+        Meeting retrievedMeeting = meetings.get(0);
+
+        assertEquals("Meeting with no details", retrievedMeeting.getTitle());
+        assertNull(retrievedMeeting.getToTime(), "To Time is empty");
+        assertNull(retrievedMeeting.getFromTime(), "From time is empty");
+        assertNull(retrievedMeeting.getAgenda(), "Agenda is empty");
+    }
+
+    @Test
     void testUpdateNoteText() {
 
         // tests if cascade works as intended
@@ -150,5 +174,38 @@ class MeetingServiceTest {
         Meeting checkMeeting = meetingService.getAllMeetings().get(0);
 
         assertTrue(checkMeeting.getNotes().isEmpty(), "The meeting has no notes anymore."); // note gone
+    }
+
+    @Test
+    void testSaveOrphanNoteShouldThrowException() {
+
+        boolean exceptionThrown = false;
+
+        MeetingNote orphanNote = new MeetingNote();
+        orphanNote.setText("I have no parent meeting!"); // intentionally not saved to a meeting
+
+        try {
+            noteRepository.save(orphanNote); // should never happen
+        } catch (DataIntegrityViolationException e) {
+            e.printStackTrace();
+            exceptionThrown = true;
+        }
+
+        assertTrue(exceptionThrown, "Exception thrown, note NEEDS to have a parent meeting");
+    }
+
+    @Test
+    void testDeleteNonExistentMeetingShouldThrowException() {
+        long fakeId = 12345;
+        boolean exceptionThrown = false;
+
+        try {
+            meetingService.deleteMeeting(fakeId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            exceptionThrown = true;
+        }
+
+        assertTrue(exceptionThrown, "Expected an Exception to be thrown when deleting non existent meeting.");
     }
 }
