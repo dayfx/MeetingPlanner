@@ -12,7 +12,7 @@ public class Meeting {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title;
+    private String title; // get persisted automatically
     private String fromTime;
     private String toTime;
 
